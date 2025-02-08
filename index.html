@@ -7,6 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
+        /* [Previous styles remain exactly the same until the canvas styles] */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -191,79 +192,123 @@
             pointer-events: none;
         }
 
+        /* Game specific styles */
+        .game-container {
+            width: 300px;
+            height: 400px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .candle {
+            width: 40px;
+            height: 60px;
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .candle::before {
+            content: '🕯️';
+            font-size: 40px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .candle.lit::before {
+            content: '✨';
+        }
+
+        .timer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: white;
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: white;
+        }
+
         /* Responsive Design */
-@media (max-width: 1024px) {
-    .hero-title {
-        font-size: 3.5rem;
-    }
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
 
-    .subtitle {
-        font-size: 1.5rem;
-    }
+            .subtitle {
+                font-size: 1.5rem;
+            }
 
-    .fun-card {
-        padding: 30px;
-        max-width: 90%;
-    }
+            .fun-card {
+                padding: 30px;
+                max-width: 90%;
+            }
 
-    .fun-button, .payment-button {
-        padding: 15px 30px;
-        font-size: 1.2rem;
-    }
-}
+            .fun-button, .payment-button {
+                padding: 15px 30px;
+                font-size: 1.2rem;
+            }
+        }
 
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.8rem;
-    }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
 
-    .subtitle {
-        font-size: 1.3rem;
-    }
+            .subtitle {
+                font-size: 1.3rem;
+            }
 
-    .fun-card h2 {
-        font-size: 2rem;
-    }
+            .fun-card h2 {
+                font-size: 2rem;
+            }
 
-    .fun-card p {
-        font-size: 1.1rem;
-    }
+            .fun-card p {
+                font-size: 1.1rem;
+            }
 
-    .fun-button, .payment-button {
-        font-size: 1rem;
-        padding: 12px 25px;
-    }
-}
+            .fun-button, .payment-button {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+        }
 
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
 
-    .subtitle {
-        font-size: 1.1rem;
-    }
+            .subtitle {
+                font-size: 1.1rem;
+            }
 
-    .fun-card {
-        padding: 20px;
-    }
+            .fun-card {
+                padding: 20px;
+            }
 
-    .fun-card h2 {
-        font-size: 1.8rem;
-    }
+            .fun-card h2 {
+                font-size: 1.8rem;
+            }
 
-    .fun-card p {
-        font-size: 1rem;
-    }
+            .fun-card p {
+                font-size: 1rem;
+            }
 
-    .fun-button, .payment-button {
-        font-size: 0.9rem;
-        padding: 10px 20px;
-    }
-}
-
-
-
+            .fun-button, .payment-button {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -282,7 +327,8 @@
                 ✨ Peek-a-Boo! The Glow Show Awaits! ✨
             </h2>
             <p style="font-size: 1.3rem; line-height: 1.6; margin-bottom: 20px;">
-                Our candles are playing dress-up in their shiniest, silliest forms! Some flicker like fireflies, some wiggle like jelly, and some are just too cute to melt! 🕯️💃💫 Click below to meet these glowing little rascals before they giggle away! 😆🔥            </p>
+                Our candles are playing dress-up in their shiniest, silliest forms! Some flicker like fireflies, some wiggle like jelly, and some are just too cute to melt! 🕯️💃💫 Click below to meet these glowing little rascals before they giggle away! 😆🔥
+            </p>
             <button class="fun-button">Make Magic Happen! ✨</button>
         </div>
     </section>
@@ -293,7 +339,7 @@
                 🌟 Grab a Glowy Gooey Candle Buddy! 🌟
             </h2>
             <p style="font-size: 1.3rem; line-height: 1.6; margin-bottom: 20px;">
-                Skip, hop, and jump into our world of wiggly-wobbly candles! Each one has a story to tell and a dance to share. Don't forget to buy atlest one of our bouncy flame friends! 🎃🕯️✨ They won’t do your homework, but they sure will light up your day! 🔥😆🔥💫
+                Skip, hop, and jump into our world of wiggly-wobbly candles! Each one has a story to tell and a dance to share. Don't forget to buy atlest one of our bouncy flame friends! 🎃🕯️✨ They won't do your homework, but they sure will light up your day! 🔥😆🔥💫
             </p>
             <a href="upi://pay?pa=8423000227@hdfcbank&pn=Anshika's 🕯️Luminash🕯️&mc=&tid=&tr=&tn=Payment&am=&cu=INR" style="text-decoration: none;">
                 <button class="payment-button">Click to Pay! 🎈</button>
@@ -304,37 +350,20 @@
     <section class="section">
         <div class="fun-card">
             <h2 style="font-size: 2.5rem; color: var(--accent2); margin-bottom: 20px;">
-                🎪 Join Our Candly Adventures! 🎪
+                🎪 Light the Magic Candles! 🎪
             </h2>
             <p style="font-size: 1.3rem; line-height: 1.6; margin-bottom: 20px;">
-                Skip, hop, and jump into our world of wiggly-wobbly candles! Each one has a story to tell and a dance to share. Don't forget to say "hello" to our bouncy flame friends! 🔥💫
+                Touch all the candles before time runs out! Can you light them all? 🕯️✨
             </p>
-            <a href="#" style="text-decoration: none;">
-            <button class="payment-button" id="boopButton">
-                Boop to Play! 🎈
-            </button>
-            </a>
+            <button class="fun-button" id="startGame">Start Game! 🎮</button>
+            <div class="game-container" id="gameContainer" style="display: none;">
+                <div class="timer" id="timer">30</div>
+                <div class="score" id="score">0/10</div>
+            </div>
         </div>
     </section>
-
-	<section class="section" id="gameSection" style="display: none;">
-        <div class="fun-card">
-            <h2 style="font-size: 2.5rem; color: var(--accent2); margin-bottom: 20px;">
-                🎮 Catch the Magic Candles! 🕯️
-            </h2>
-            <p style="font-size: 1.3rem; line-height: 1.6; margin-bottom: 20px;">
-                Move your basket left and right to catch falling candles! Don't let them fall! 
-                Score: <span id="gameScore">0</span>
-            </p>
-            <canvas id="gameCanvas" width="400" height="400" style="background: rgba(0,0,0,0.8); border-radius: 20px;"></canvas>
-            <button class="fun-button" id="startGame" style="margin-top: 20px;">Start Game! 🎮</button>
-        </div>
-    </section>
-
-
 
     <script>
-        
         gsap.registerPlugin(ScrollTrigger);
 
         // Create sparkles on mouse move
@@ -375,38 +404,6 @@
 
         setInterval(createEmoji, 200);
 
-        // Boop button effect
-        const boopButton = document.getElementById('boopButton');
-        boopButton.addEventListener('click', () => {
-            gsap.to(boopButton, {
-                scale: 0.9,
-                rotation: -10,
-                duration: 0.1,
-                yoyo: true,
-                repeat: 1,
-                onComplete: () => {
-                    // Create confetti explosion
-                    for (let i = 0; i < 50; i++) {
-                        const confetti = document.createElement('div');
-                        confetti.className = 'confetti';
-                        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
-                        confetti.style.left = boopButton.offsetLeft + boopButton.offsetWidth/2 + 'px';
-                        confetti.style.top = boopButton.offsetTop + boopButton.offsetHeight/2 + 'px';
-                        document.body.appendChild(confetti);
-                        
-                        gsap.to(confetti, {
-                            x: (Math.random() - 0.5) * 400,
-                            y: (Math.random() - 0.5) * 400,
-                            rotation: Math.random() * 720 - 360,
-                            duration: 1 + Math.random(),
-                            ease: 'power1.out',
-                            onComplete: () => confetti.remove()
-                        });
-                    }
-                }
-            });
-        });
-
         // Scroll animations
         gsap.utils.toArray('.fun-card').forEach(card => {
             gsap.from(card, {
@@ -417,8 +414,7 @@
                 scrollTrigger: {
                     trigger: card,
                     start: 'top bottom',
-                    end: 'center center',
-                    scrub: 1
+                    end: 'center center',scrub: 1
                 }
             });
         });
@@ -430,112 +426,96 @@
             ).join('');
         });
 
-	// Candle Catching Game
-        const gameSection = document.getElementById('gameSection');
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
+        // Game Logic
+        const gameContainer = document.getElementById('gameContainer');
         const startGameBtn = document.getElementById('startGame');
-        let gameScore = 0;
-        let gameActive = false;
-        let basket = { x: 175, y: 350, width: 50, height: 30 };
-        let candles = [];
-        let gameLoop;
+        const timerElement = document.getElementById('timer');
+        const scoreElement = document.getElementById('score');
+        let gameTimer;
+        let timeLeft;
+        let litCandles;
+        let totalCandles;
 
-        // Show game section when payment button is clicked
-        document.getElementById('boopButton').addEventListener('click', () => {
-            setTimeout(() => {
-                gameSection.style.display = 'flex';
-                gameSection.scrollIntoView({ behavior: 'smooth' });
-            }, 1000);
-        });
-
-        class Candle {
-            constructor() {
-                this.width = 20;
-                this.height = 40;
-                this.x = Math.random() * (canvas.width - this.width);
-                this.y = -this.height;
-                this.speed = 2 + Math.random() * 2;
-                this.color = `hsl(${Math.random() * 360}, 80%, 60%)`;
-            }
-
-            draw() {
-                // Candle body
-                ctx.fillStyle = this.color;
-                ctx.fillRect(this.x, this.y, this.width, this.height);
-                
-                // Flame
-                ctx.beginPath();
-                ctx.fillStyle = 'orange';
-                ctx.ellipse(this.x + this.width/2, this.y - 5, 5, 8, 0, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            update() {
-                this.y += this.speed;
-                return this.y > canvas.height;
-            }
-        }
-
-        function drawBasket() {
-            ctx.fillStyle = '#FFD700';
-            ctx.beginPath();
-            ctx.moveTo(basket.x, basket.y);
-            ctx.lineTo(basket.x + basket.width, basket.y);
-            ctx.lineTo(basket.x + basket.width - 10, basket.y + basket.height);
-            ctx.lineTo(basket.x + 10, basket.y + basket.height);
-            ctx.closePath();
-            ctx.fill();
-        }
-
-        function checkCollision(candle) {
-            return candle.y + candle.height > basket.y &&
-                   candle.x + candle.width > basket.x &&
-                   candle.x < basket.x + basket.width;
-        }
-
-        function updateGame() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function createCandle(x, y) {
+            const candle = document.createElement('div');
+            candle.className = 'candle';
+            candle.style.left = x + 'px';
+            candle.style.top = y + 'px';
             
-            if (Math.random() < 0.03) candles.push(new Candle());
-            
-            candles = candles.filter(candle => {
-                candle.draw();
-                if (checkCollision(candle)) {
-                    gameScore++;
-                    document.getElementById('gameScore').textContent = gameScore;
-                    return false;
-                }
-                return !candle.update();
+            candle.addEventListener('click', () => lightCandle(candle));
+            candle.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                lightCandle(candle);
             });
             
-            drawBasket();
+            return candle;
         }
 
-        startGameBtn.addEventListener('click', () => {
-            if (!gameActive) {
-                gameActive = true;
-                gameScore = 0;
-                document.getElementById('gameScore').textContent = gameScore;
-                candles = [];
-                gameLoop = setInterval(updateGame, 1000/60);
-                startGameBtn.textContent = 'Stop Game 🛑';
-            } else {
-                gameActive = false;
-                clearInterval(gameLoop);
-                startGameBtn.textContent = 'Start Game! 🎮';
+        function lightCandle(candle) {
+            if (!candle.classList.contains('lit')) {
+                candle.classList.add('lit');
+                litCandles++;
+                scoreElement.textContent = `${litCandles}/${totalCandles}`;
+                
+                if (litCandles === totalCandles) {
+                    endGame(true);
+                }
             }
-        });
+        }
 
-        canvas.addEventListener('mousemove', (e) => {
-            if (gameActive) {
-                const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                basket.x = Math.max(0, Math.min(canvas.width - basket.width, x - basket.width/2));
+        function startGame() {
+            gameContainer.style.display = 'block';
+            gameContainer.innerHTML = '';
+            gameContainer.appendChild(timerElement);
+            gameContainer.appendChild(scoreElement);
+            
+            litCandles = 0;
+            totalCandles = 10;
+            timeLeft = 8;
+            
+            timerElement.textContent = timeLeft;
+            scoreElement.textContent = `${litCandles}/${totalCandles}`;
+            
+            // Create random candles
+            for (let i = 0; i < totalCandles; i++) {
+                const x = Math.random() * (gameContainer.offsetWidth - 40);
+                const y = Math.random() * (gameContainer.offsetHeight - 60);
+                const candle = createCandle(x, y);
+                gameContainer.appendChild(candle);
             }
-        });
+            
+            gameTimer = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    endGame(false);
+                }
+            }, 1000);
+            
+            startGameBtn.textContent = 'Playing... 🕯️';
+            startGameBtn.disabled = true;
+        }
 
-        // [Rest of the previous script code remains exactly the same]
+        function endGame(won) {
+            clearInterval(gameTimer);
+            
+            const message = won ? 
+                '🎉 Congratulations! You lit all the candles! 🎉' : 
+                '⏰ Time\'s up! Try again to light all candles! ⏰';
+                
+            gameContainer.innerHTML = `
+                <div style="text-align: center; padding: 20px; color: white;">
+                    <h3>${message}</h3>
+                    <p>Final Score: ${litCandles}/${totalCandles}</p>
+                </div>
+            `;
+            
+            startGameBtn.textContent = 'Play Again! 🎮';
+            startGameBtn.disabled = false;
+        }
+
+        startGameBtn.addEventListener('click', startGame);
     </script>
 </body>
 </html>
